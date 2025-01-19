@@ -1,2 +1,79 @@
-<label for="name">Name: </label>
-<input id="name" type="text" [formControl]="name" />
+<ion-list lines="full">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select formControlName="type" required="true">
+        <ion-select-option value="income">Income</ion-select-option>
+        <ion-select-option value="expense">Expense</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Amount</ion-label>
+      <ion-input formControlName="amount" required="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select formControlName="category" required="true">
+        <ion-select-option value="food">Food</ion-select-option>
+        <ion-select-option value="medical">Medical</ion-select-option>
+      </ion-select>
+      <p *ngIf="myForm.get('category')?.hasError('required')">
+        Category is required
+      </p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-button id="open-modal" expand="block">Open</ion-button>
+      <p *ngIf="myForm.get('date')?.hasError('required')">
+        Category is required
+      </p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Account</ion-label>
+      <ion-input formControlName="account" required="true"></ion-input>
+      <p *ngIf="myForm.get('account')?.hasError('required')">
+        Category is required
+      </p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Repeat</ion-label>
+      <ion-select formControlName="repeat" required="true">
+        <ion-select-option value="yes">Yes</ion-select-option>
+        <ion-select-option value="no">No</ion-select-option>
+      </ion-select>
+      <p *ngIf="myForm.get('repeat')?.hasError('required')">
+        Category is required
+      </p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Note</ion-label>
+      <ion-textarea formControlName="note"></ion-textarea>
+      <p *ngIf="myForm.get('note')?.hasError('required')">
+        Category is required
+      </p>
+    </ion-item>
+    <ion-button
+      expand="full"
+      color="primary"
+      type="submit"
+      [disabled]="myForm.invalid"
+      >Submit</ion-button
+    >
+
+    <ion-modal
+      [keepContentsMounted]="true"
+      trigger="open-modal"
+      class="ion-datetime-button-overlay"
+    >
+      <ng-template>
+        <ion-datetime formControlName="date" presentation="date"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </form>
+</ion-list>
