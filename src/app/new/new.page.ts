@@ -12,7 +12,6 @@ import {
   selector: "app-new",
   templateUrl: "./new.page.html",
   styleUrls: ["./new.page.scss"],
-  standalone: true,
   imports: [
     IonContent,
     IonHeader,
