@@ -7,6 +7,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/angular/standalone";
+import { TransFormComponent } from "../trans-form/trans-form.component";
 
 @Component({
   selector: "app-new",
@@ -19,6 +20,7 @@ import {
     IonToolbar,
     CommonModule,
     FormsModule,
+    TransFormComponent,
   ],
 })
 export class NewPage implements OnInit {
