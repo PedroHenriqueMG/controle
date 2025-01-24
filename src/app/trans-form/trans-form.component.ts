@@ -44,12 +44,14 @@ export class TransFormComponent implements OnInit {
   formStatus = signal<string>(""); // Signal to track form status
   constructor(private formBuilder: FormBuilder) {}
 
+  private today = new Date().toISOString().split("T")[0];
+
   ngOnInit(): void {
     this.myForm = this.formBuilder.group({
       type: ["", Validators.required],
       amount: ["", Validators.required],
       category: ["", Validators.required],
-      date: ["2023-01-01", Validators.required],
+      date: [this.today],
       account: ["", Validators.required],
       repeat: ["", Validators.required],
       note: [""],
@@ -69,7 +71,7 @@ export class TransFormComponent implements OnInit {
       this.formStatus.set("Form contains errors.");
     }
   }
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);
       if (control instanceof FormGroup) {
@@ -78,5 +80,14 @@ export class TransFormComponent implements OnInit {
         control?.markAsTouched();
       }
     });
+  }
+  updateDate(event: CustomEvent): void {
+    this.myForm.patchValue({
+      date: event.detail.value,
+    });
+    const modal = document.querySelector("ion-modal");
+    if (modal) {
+      modal.dismiss();
+    }
   }
 }

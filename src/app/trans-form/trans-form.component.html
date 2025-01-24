@@ -26,10 +26,8 @@
 
     <ion-item>
       <ion-label>Date</ion-label>
+      <p>{{ myForm.get("date")?.value }}</p>
       <ion-button id="open-modal" expand="block">Open</ion-button>
-      <p *ngIf="myForm.get('date')?.hasError('required')">
-        Category is required
-      </p>
     </ion-item>
 
     <ion-item>
@@ -67,12 +65,17 @@
     >
 
     <ion-modal
+      id="open-modal"
       [keepContentsMounted]="true"
       trigger="open-modal"
       class="ion-datetime-button-overlay"
     >
       <ng-template>
-        <ion-datetime formControlName="date" presentation="date"></ion-datetime>
+        <ion-datetime
+          formControlName="date"
+          presentation="date"
+          (ionChange)="updateDate($event)"
+        ></ion-datetime>
       </ng-template>
     </ion-modal>
   </form>
