@@ -14,8 +14,6 @@ export class StorageService {
 
   async init() {
     // If using, define drivers here: await this.storage.defineDriver(/*...*/);
-    await this.storage.defineDriver(indexedDB);
-    await this.storage.defineDriver(localStorage);
     const storage = await this.storage.create();
     this._storage = storage;
   }
